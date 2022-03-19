@@ -1,0 +1,47 @@
+@import "../../sass/helpers/mixins";
+@import "../../sass/helpers/variables";
+
+.registration__list {
+  .registration__select {
+    &.active {
+      .custom-amount {
+        color: $color-green-200;
+      }
+    }
+  }
+}
+#registration-page {
+  .registration__select {
+    &-icon {
+      i {
+        font-size: 48px;
+        color: $color-green-200;
+      }
+    }
+    &.active {
+      .registration__select-icon {
+        i {
+          color: $color-green;
+        }
+      }
+    }
+  }
+}
+.accordian-wrap {
+  border: 1px solid $color-green-200;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  border-radius: 3px;
+  .accordian-title {
+    color: $color-green;
+    font-weight: $medium;
+  }
+  .icon-wrap {
+    i {
+      color: $color-gray-200;
+    }
+  }
+}
+

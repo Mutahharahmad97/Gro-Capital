@@ -1,0 +1,135 @@
+@import '../../assets/sass/helpers/variables';
+@import '../../assets/sass/helpers/mixins';
+
+.page-overlay {
+  background-color: rgba($color-black, 0.16);
+  transition: opacity .2s ease-out, visibility .2s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.site-footer {
+  padding: 35px 0 50px;
+
+  @include mq(xxs, sm) {
+    text-align: center;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: $color-gray-200;
+    margin: 0;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 -15px 6px;
+
+    @include mq(xxs, sm) {
+      flex-direction: column;
+    }
+  }
+
+  &__col {
+    padding: 0 15px;
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    @include mq(xxs, sm) {
+      padding: 15px 0;
+    }
+
+    @include mq(sm) {
+      text-align: center;
+      width: 200px;
+    }
+
+    a {
+      margin: 0 4px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      border-radius: 50%;
+      align-items: center;
+      border: 1px solid $color-gray-200;
+      transition: border-color 0.2s ease-out;
+
+      svg,
+      img {
+        fill: $color-gray-200;
+        transition: fill 0.2s ease-out;
+      }
+
+      &:hover {
+        border-color: $color-primary;
+
+        svg,
+        img {
+          fill: $color-primary;
+        }
+      }
+    }
+  }
+
+  &__col--flex {
+    flex: 1;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include mq(xxs, sm) {
+      justify-content: center;
+    }
+
+    @include mq(sm) {
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    li {
+      margin-left: 45px;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    a {
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: $color-green;
+      display: inline-block;
+      transition: color 0.2s ease-out;
+
+      &:hover {
+        color: $color-green-200;
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+.text {
+  padding-top: 50px;
+  
+  h1 {
+    line-height: 1.4;
+    color: $color-primary;
+    margin: 0 0 50px;
+
+    @include mq(xxs, sm) {
+      font-size: 27px;
+    }
+
+    @include mq(sm) {
+      font-size: 37px;
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    color: $color-green;
+  }
+
+  h2 {
+    margin-bottom: 5px;
+
+    @include mq(xxs, sm) {
+      font-size: 18px;
+    }
+
+    @include mq(sm) {
+      font-size: 21px;
+    }
+  }
+
+  h3 {
+    margin-bottom: 5px;
+
+    @include mq(xxs, sm) {
+      font-size: 16px;
+    }
+
+    @include mq(sm) {
+      font-size: 18px;
+    }
+  }
+
+  h4 {
+    margin-bottom: 5px;
+
+    @include mq(xxs, sm) {
+      font-size: 15px;
+    }
+
+    @include mq(sm) {
+      font-size: 16px;
+    }
+  }
+
+  p {
+    line-height: 1.5;
+
+    @include mq(xxs, sm) {
+      font-size: 14px;
+      margin: 0 0 14px;
+    }
+
+    @include mq(sm) {
+      font-size: 16px;
+      margin: 0 0 20px;
+    }
+  }
+
+  ul,
+  ol {
+    padding: 0 0 0 18px;
+
+    @include mq(xxs, sm) {
+      margin: 0 0 14px;
+    }
+
+    @include mq(sm) {
+      margin: 0 0 20px;
+    }
+  }
+
+  li {
+    margin: 0 0 5px;
+
+    @include mq(xxs, sm) {
+      font-size: 14px;
+    }
+
+    @include mq(sm) {
+      font-size: 16px;
+    }
+  }
+}

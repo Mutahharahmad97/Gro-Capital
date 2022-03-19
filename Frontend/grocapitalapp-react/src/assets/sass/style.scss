@@ -1,0 +1,37 @@
+//===========================================
+// -Helpers Start
+//===========================================
+@import "helpers/variables";
+@import "helpers/mixins";
+//===========================================
+// -Helpers End
+//===========================================
+
+//===========================================
+// -Partials Start
+//===========================================
+@import "partials/forms";
+@import "partials/alerts";
+@import "partials/fonts";
+@import "partials/home";
+@import "partials/popup";
+@import "partials/text";
+@import "partials/typography";
+@import "partials/registration";
+@import "partials/reset";
+@import "partials/dashboard";
+@import "partials/sidebar";
+@import "partials/calendar";
+@import "partials/global";
+@import "partials/loanHistory";
+@import "partials/settings_page";
+//===========================================
+// -Partials End
+//===========================================
+
+// Add packages as per your requirement
+// package can be inlude via node_modules or manuallay from vendors folder
+@import "vendors/grid";
+//===========================================
+// -Vendors End
+//===========================================

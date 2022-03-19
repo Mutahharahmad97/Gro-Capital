@@ -1,0 +1,67 @@
+@import "../../assets/sass/helpers/variables";
+@import "../../assets/sass/helpers/mixins";
+
+.border-image-parent {
+  display: flex;
+  justify-content: center;
+  border: 1px solid silver;
+  padding: 30px;
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    border-color: $color-green;
+  }
+  transition: border 300ms ease-out;
+}
+
+.border-image-parent-disabled {
+  display: flex;
+  justify-content: center;
+  border: 1px solid silver;
+  border-radius: 7px;
+}
+
+.drop-down-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: $color-green;
+}
+
+.heading-container {
+  display: flex;
+  padding: 40px 0 20px 0;
+  align-items: center;
+  margin-left: -20px;
+  .back-btn {
+    position: relative;
+    margin-right: 20px;
+    span > i {
+      font-size: 30px;
+      color: $color-green;
+      cursor: pointer;
+    }
+  }
+  .title {
+    flex-grow: 1;
+    h1 {
+      margin: 0;
+      line-height: 34px;
+    }
+  }
+}
+
+.wrap-custom {
+  @include mq(md) {
+    max-width: 100% !important;
+    padding-left: 150px !important;
+  }
+}
+
+
+.form_custom {
+  width: 62% !important;
+
+  @include mq(xxs, sm) {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,436 @@
+.hero {
+  background-position: center;
+  background-size: cover;
+
+  @include mq(xxs, sm) {
+    padding: 40px 0;
+  }
+
+  @include mq(sm, md) {
+    padding: 50px 0;
+  }
+
+  @include mq(md) {
+    padding: 60px 0 10px 0;
+  }
+
+  h1,
+  h2 {
+    color: $color-white;
+    text-align: center;
+  }
+
+  h1 {
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 0 0 12px;
+
+    @include mq(xxs, sm) {
+      font-size: 26px;
+    }
+
+    @include mq(sm) {
+      font-size: 36px;
+    }
+  }
+
+  h2 {
+    color: $color-green-200;
+    font-weight: 500;
+    line-height: 1.2;
+
+    @include mq(xxs, sm) {
+      font-size: 18px;
+      margin: 0 0 30px;
+    }
+
+    @include mq(sm) {
+      font-size: 21px;
+      margin: 0 0 50px;
+    }
+  }
+
+  .registration__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-white;
+    text-align: center;
+  }
+
+  .registration__select {
+    background-color: $color-transparent;
+    border-color: $color-green-200;
+    color: $color-white;
+    &-icon {
+      i {
+        font-size: 48px;
+      }
+    }
+    h3,
+    p {
+      color: currentColor;
+    }
+
+    img,
+    svg {
+      fill: currentColor;
+    }
+
+    &:hover {
+      h3,
+      p {
+        color: currentColor;
+      }
+
+      img,
+      svg {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+
+    @include mq(sm) {
+      a {
+        min-width: 350px;
+      }
+    }
+  }
+}
+.custom-amount {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $color-green-200;
+  transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
+  color: $color-white;
+  font-size: 16px;
+  font-weight: 500;
+}
+.box {
+  &:nth-child(even) {
+    background-color: $color-gray-300;
+  }
+
+  @include mq(xxs, sm) {
+    padding: 40px 0;
+  }
+
+  @include mq(sm, md) {
+    padding: 50px 0;
+  }
+
+  @include mq(md) {
+    padding: 60px 0;
+  }
+
+  &__title {
+    text-align: center;
+
+    @include mq(xxs, sm) {
+      margin: 0 0 30px;
+    }
+
+    @include mq(sm) {
+      margin: 0 0 50px;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin: 0 0 15px;
+
+      @include mq(xxs, sm) {
+        font-size: 24px;
+      }
+
+      @include mq(sm) {
+        font-size: 32px;
+      }
+    }
+
+    h3 {
+      font-weight: 500;
+      margin: 0;
+      color: $color-gray-200;
+
+      @include mq(xxs, sm) {
+        font-size: 16px;
+      }
+
+      @include mq(sm) {
+        font-size: 21px;
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px -20px;
+  }
+
+  &__col {
+    flex: 1;
+    margin: 0 0 20px;
+    padding: 0 15px;
+  }
+
+  &__info {
+    text-align: center;
+
+    h3 {
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+
+  &__info-icon {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 20px;
+    i {
+      font-size: 77px;
+      color: $color-green-200;
+    }
+
+    img,
+    svg {
+      fill: $color-green-200;
+    }
+  }
+
+  &__info-icon-bg {
+    width: 116px;
+    height: 116px;
+    background-color: $color-green;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 25px;
+    i {
+      font-size: 64px;
+      color: $color-white;
+    }
+
+    img,
+    svg {
+      fill: $color-white;
+    }
+  }
+
+  &__img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .flex-row-reverse {
+    .col-12:first-child {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__article {
+    max-width: 400px;
+
+    h2 {
+      line-height: 1.2;
+      font-weight: 600;
+
+      @include mq(xxs, sm) {
+        font-size: 24px;
+        margin: 0 0 15px;
+      }
+
+      @include mq(sm) {
+        font-size: 32px;
+        margin: 0 0 30px;
+      }
+    }
+
+    h3 {
+      line-height: 1.2;
+      font-weight: 500;
+      margin: 0;
+      color: $color-gray-200;
+
+      @include mq(xxs, sm) {
+        font-size: 16px;
+      }
+
+      @include mq(sm) {
+        font-size: 21px;
+      }
+    }
+
+    p {
+      line-height: 1.4;
+      color: $color-gray-200;
+      font-weight: 500;
+      margin: 0 0 20px;
+
+      &:last-of-type {
+        margin: 0;
+      }
+
+      @include mq(xxs, sm) {
+        font-size: 15px;
+      }
+
+      @include mq(sm) {
+        font-size: 17px;
+      }
+    }
+  }
+
+  &__article-link {
+    padding-top: 40px;
+  }
+
+  &__more {
+    text-align: center;
+
+    a {
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: $color-gray;
+      display: inline-block;
+    }
+  }
+}
+
+.link-with-arrow {
+  font-size: 17px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: $color-green;
+  display: inline-flex;
+  align-items: center;
+  i {
+    color: $color-green-200;
+    font-size: 29px;
+  }
+
+  img,
+  svg,
+  i {
+    margin-left: 10px;
+    fill: $color-green-200;
+    transition: transform 0.2s ease-out;
+  }
+
+  &:hover {
+    img,
+    svg,
+    i {
+      transform: translate3d(10px, 0, 0);
+    }
+  }
+}
+
+.row--logos {
+  img {
+    display: block;
+    margin: 0 auto 60px;
+    filter: grayscale(1);
+    opacity: 0.63;
+    transition: filter 0.2s ease-out, opacity 0.2s ease-out;
+
+    &:hover {
+      opacity: 1;
+      filter: grayscale(0);
+    }
+  }
+}
+
+.hero-bottom {
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    background-color: rgba($color-green, 0.83);
+  }
+
+  &__inner {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+
+    h2 {
+      font-weight: 600;
+      line-height: 1.2;
+      color: $color-white;
+    }
+
+    @include mq(xxs, sm) {
+      padding: 60px 0;
+
+      h2 {
+        font-size: 26px;
+        margin: 0 0 25px;
+      }
+    }
+
+    @include mq(sm, md) {
+      padding: 90px 0;
+
+      h2 {
+        font-size: 30px;
+        margin: 0 0 35px;
+      }
+    }
+
+    @include mq(md) {
+      padding: 130px 0;
+
+      h2 {
+        font-size: 36px;
+        margin: 0 0 45px;
+      }
+
+      .btn {
+        min-width: 352px;
+      }
+    }
+  }
+}
+
+.row--article {
+  @include mq(xxs, sm) {
+    flex-direction: column-reverse !important;
+
+    .box__img {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.row--icons {
+  margin-bottom: -30px;
+
+  .col-12 {
+    padding-bottom: 30px;
+  }
+}
+
+html,
+body {
+  @include mq(xxs, md) {
+    overflow-x: hidden;
+  }
+}

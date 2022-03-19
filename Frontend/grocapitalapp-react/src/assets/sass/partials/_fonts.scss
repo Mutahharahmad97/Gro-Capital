@@ -1,0 +1,169 @@
+//===========================================
+// -Fonts start
+//===========================================
+
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@400;500;600;700&display=swap");
+
+@include font-face($icomoon-font-family, $font-path, $icomoon-font-family);
+
+[class^="icon-"],
+[class*=" icon-"] {
+  //    use !important to prevent issues with browser extensions that change fonts
+  font-family: "#{$icomoon-font-family}" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+.icon-caret-down {
+  &:before {
+    content: $icon-caret-down;
+  }
+}
+.icon-caret-up {
+  &:before {
+    content: $icon-caret-up;
+  }
+}
+.icon-close {
+  &:before {
+    content: $icon-close;
+  }
+}
+.icon-email {
+  &:before {
+    content: $icon-email;
+  }
+}
+.icon-hamburger {
+  &:before {
+    content: $icon-hamburger;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin;
+  }
+}
+.icon-plant {
+  &:before {
+    content: $icon-plant;
+  }
+}
+.icon-profile {
+  &:before {
+    content: $icon-profile;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+  }
+}
+.icon-expansion {
+  &:before {
+    content: $icon-expansion;
+  }
+}
+.icon-inventoryorequipment {
+  &:before {
+    content: $icon-inventoryorequipment;
+  }
+}
+.icon-marketing {
+  &:before {
+    content: $icon-marketing;
+  }
+}
+.icon-notsure {
+  &:before {
+    content: $icon-notsure;
+  }
+}
+.icon-payrent {
+  &:before {
+    content: $icon-payrent;
+  }
+}
+.icon-workingcapital {
+  &:before {
+    content: $icon-workingcapital;
+  }
+}
+.icon-info {
+  &:before {
+    content: $icon-info;
+  }
+}
+.icon-clock {
+  &:before {
+    content: $icon-clock;
+  }
+}
+.icon-security {
+  &:before {
+    content: $icon-security;
+  }
+}
+.icon-convertibledebt {
+  &:before {
+    content: $icon-convertibledebt;
+  }
+}
+.icon-equityfinancing {
+  &:before {
+    content: $icon-equityfinancing;
+  }
+}
+.icon-factoring {
+  &:before {
+    content: $icon-factoring;
+  }
+}
+.icon-lineofcredit {
+  &:before {
+    content: $icon-lineofcredit;
+  }
+}
+.icon-termloan {
+  &:before {
+    content: $icon-termloan;
+  }
+}
+.icon-arrow {
+  &:before {
+    content: $icon-arrow;
+  }
+}
+.icon-calender {
+  &:before {
+    content: $icon-calender;
+  }
+}
+.icon-faq {
+  &:before {
+    content: $icon-faq;
+  }
+}
+.icon-add-file {
+  &:before {
+    content: $icon-add-file;
+  }
+}
+.icon-edit {
+  &:before {
+    content: $icon-edit;
+  }
+}
+.icon-checked {
+  &:before {
+    content: $icon-checked;
+  }
+}
+.icon-angle-left {
+  &:before {
+    content: $icon-angle-left;
+  }
+}

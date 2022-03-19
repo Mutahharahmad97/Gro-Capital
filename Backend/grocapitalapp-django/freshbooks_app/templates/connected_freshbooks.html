@@ -1,0 +1,61 @@
+{% load static %}
+<html>
+
+<head>
+  <title>OAuth2 Sample App - Intuit</title>
+  <!-- <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    const company_name = ('{{ context.company_name|escapejs }}');
+    const currency_code = ('{{ context.currency_code|escapejs }}');
+    const end_date = ('{{ context.end_date|escapejs }}');
+    const total_expenses = ('{{ context.total_expenses|escapejs }}');
+    const total_income = ('{{ context.total_income|escapejs }}');
+
+    const gross_profit_ytd = ('{{ context.gross_profit_ytd|escapejs }}');
+    const gross_profit_1 = ('{{ context.gross_profit_1|escapejs }}');
+    const gross_profit_2 = ('{{ context.gross_profit_2|escapejs }}');
+    const gross_profit_3 = ('{{ context.gross_profit_3|escapejs }}');
+
+    const net_profit_ytd = ('{{ context.net_profit_ytd|escapejs }}');
+
+    const net_profit_1 = ('{{ context.net_profit_1|escapejs }}');
+    const net_profit_2 = ('{{ context.net_profit_2|escapejs }}');
+    const net_profit_3 = ('{{ context.net_profit_3|escapejs }}');
+
+    const cogs_1 = ('{{ context.cogs_1|escapejs }}');
+    const cogs_2 = ('{{ context.cogs_2|escapejs }}');
+    const cogs_3 = ('{{ context.cogs_3|escapejs }}');
+
+
+    if (window.opener) {
+      window.opener.location.href = "/freshbooks_app/connected";
+      window.close();
+    }
+    const queryParams = ('company_name=' + company_name + '&currency_code=' + currency_code + '&end_date=' + end_date +
+      '&total_expenses=' + total_expenses + '&total_income=' + total_income + '&gross_profit_ytd=' +
+      gross_profit_ytd + '&gross_profit_1=' + gross_profit_1 + '&gross_profit_2=' + gross_profit_2 +
+      '&gross_profit_3=' + gross_profit_3 +'&net_profit_ytd=' + net_profit_ytd +'&net_profit_1=' + net_profit_1 + '&net_profit_2=' + net_profit_2 +
+      '&net_profit_3=' + net_profit_3 + '&cogs_py_1=' + cogs_1 + '&cogs_py_2=' + cogs_2 +
+      '&cogs_py_3=' + cogs_3);
+
+    const baseUrl = ('{{ context.base_url|escapejs }}');
+    window.location.replace(baseUrl + "/freshbooks-middleware?" + queryParams);
+  </script>
+</head>
+<!-- <body>
+    <div>
+      <h1>API Call Result</h1>
+      <br /><br />
+      <div>
+        <h3 style="color: red">Profit/Loss API</h3>
+        {% if data %}
+            <div>
+                <code>{{ data }}</code>
+            </div>
+        {% endif %}
+      </div>
+    </div>
+  </body> -->
+
+</html>

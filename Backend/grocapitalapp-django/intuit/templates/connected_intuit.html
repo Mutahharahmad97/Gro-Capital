@@ -1,0 +1,52 @@
+{% load static %}
+<html>
+    <head>
+        <title>OAuth2 Sample intuit - Intuit</title>
+        <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            if (window.opener) {
+                window.opener.location.href = '/intuit/connected'
+                window.close()
+            }
+            // let quicbooksResponse = ('{{ quickbooks_response|escapejs }}');
+            const total_bank_accounts = ('{{ total_bank_accounts|escapejs }}');
+            const total_other_current_assets = ('{{ total_other_current_assets|escapejs }}');
+            const total_current_assets = ('{{ total_current_assets|escapejs }}');
+            const total_fixed_assets = ('{{ total_fixed_assets|escapejs }}');
+            const total_assets = ('{{ total_assets|escapejs }}');
+            const accounts_payable = ('{{ accounts_payable|escapejs }}');
+            const total_accounts_payable = ('{{ total_accounts_payable|escapejs }}');
+            const total_other_current_liabilities = ('{{ total_other_current_liabilities|escapejs }}');
+            const total_current_liabilities = ('{{ total_current_liabilities|escapejs }}');
+            const total_long_term_liabilities = ('{{ total_long_term_liabilities|escapejs }}');
+            const total_liabilities = ('{{ total_liabilities|escapejs }}');
+            const total_equity = ('{{ total_equity|escapejs }}');
+            const total_liabilities_and_equity = ('{{ total_liabilities_and_equity|escapejs }}');
+            const accounts_recieveable = ('{{ accounts_recieveable|escapejs }}');
+
+            const queryParams = ('total_bank_accounts=' + total_bank_accounts + '&total_other_current_assets=' + total_other_current_assets + '&total_current_assets=' + total_current_assets + 
+                                '&total_fixed_assets=' + total_fixed_assets + '&total_assets=' + total_assets + '&accounts_payable=' + accounts_payable + '&total_accounts_payable=' + total_accounts_payable + 
+                                '&total_other_current_liabilities=' + total_other_current_liabilities + '&total_current_liabilities=' + total_current_liabilities + '&total_long_term_liabilities=' + total_long_term_liabilities + 
+                                '&total_liabilities=' + total_liabilities + '&total_equity=' + total_equity + '&total_liabilities_and_equity=' + total_liabilities_and_equity+'&accounts_recieveable=' + accounts_recieveable)
+            const baseUrl = ('{{ base_url|escapejs }}');
+            window.location.replace(baseUrl + "/quickbooks-middleware?" + queryParams);
+        </script>
+        <!-- <script>
+            function apiCall() {
+                $("#result").html('Loading...')
+                $.get("/intuit/qbo_request", function (data) {
+                    $("#result").html(data)
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <a href="/intuit/">Home</a> 
+        <br/>
+        <br/>
+        <button onclick="apiCall()">QuickBooks Balance Sheet API Call</button>
+        <div><code id="result"></code></div>
+        </div>
+    </body> -->
+</html>

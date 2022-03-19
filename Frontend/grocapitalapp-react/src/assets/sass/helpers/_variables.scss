@@ -1,0 +1,161 @@
+@import "./mixins";
+
+$window: 100%;
+$wrap: 1200px;
+$padding-left: 10px;
+$padding-right: 10px;
+
+$font-size: 14px;
+$line-height: 1.7;
+$font-family: "Spartan", sans-serif;
+$ff: $font-family;
+$icomoon-font-family: "icomoon" !default;
+//$font-title: ; $ft: $font-title;
+
+$font-path: "../../../fonts";
+
+//icon
+$icon-close: "\e900";
+$icon-email: "\e901";
+$icon-hamburger: "\e902";
+$icon-linkedin: "\e903";
+$icon-plant: "\e904";
+$icon-profile: "\e905";
+$icon-twitter: "\e907";
+$icon-expansion: "\e906";
+$icon-inventoryorequipment: "\e908";
+$icon-marketing: "\e909";
+$icon-notsure: "\e90a";
+$icon-payrent: "\e90b";
+$icon-info: "\e90d";
+$icon-clock: "\e90e";
+$icon-security: "\e90f";
+$icon-convertibledebt: "\e910";
+$icon-termloan: "\e914";
+$icon-workingcapital: "\e90c";
+$icon-equityfinancing: "\e911";
+$icon-factoring: "\e912";
+$icon-lineofcredit: "\e913";
+$icon-arrow: "\e915";
+$icon-calender: "\e916";
+$icon-faq: "\e917";
+$icon-add-file: "\e918";
+$icon-edit: "\e919";
+$icon-checked: "\e91a";
+$icon-angle-left: "\e91b";
+$icon-caret-down: "\e91c";
+$icon-caret-up: "\e91d";
+
+$color-primary: #000000;
+$p: $color-primary;
+$color-secondary: #000000;
+$s: $color-secondary;
+$color-text: $color-primary;
+$t: $color-text;
+$color-link: #242424;
+$l: $color-link;
+
+$color-white: #ffffff;
+$w: $color-white;
+$color-black: #000000;
+$b: $color-black;
+$color-gray: #cfcfcf;
+$g: $color-gray;
+$color-gray-100: #eff2f2;
+$color-gray-200: #7d7d7d;
+$color-gray-300: #f9f9f9;
+$color-green: #016d53;
+$color-green-100: #034b3a;
+$color-green-200: #80b6a9;
+$color-green-300: #edf5f5;
+$color-green-400: $color-green-200;
+$color-green-500: #c4ffc8;
+$color-green-600: #eafbeb;
+$color-blue: #3170ac;
+$color-red: #dc3c3c;
+$color-brown: #a45b08;
+$color-orange: #ffa200;
+$color-transparent: transparent;
+$tr: $color-transparent;
+
+$thin: 100;
+$extra-light: 200;
+$light: 300;
+$normal: 400;
+$medium: 500;
+$demi-bold: 600;
+$bold: 700;
+$heavy: 800;
+$extra: 900;
+
+%reset-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+%title-h1 {
+  line-height: 1.4;
+
+  @include mq(xxs, xl) {
+    font-size: calc(35px + (45 - 35) * ((100vw - 320px) / (1599 - 320)));
+  }
+
+  @include mq(xl) {
+    font-size: 45px;
+  }
+}
+
+%title-h2 {
+  line-height: 1.25;
+
+  @include mq(xxs, xl) {
+    font-size: calc(30px + (40 - 30) * ((100vw - 320px) / (1599 - 320)));
+  }
+
+  @include mq(xl) {
+    font-size: 40px;
+  }
+}
+
+%title-h3 {
+  line-height: 1.25;
+
+  @include mq(xxs, xl) {
+    font-size: calc(25px + (35 - 25) * ((100vw - 320px) / (1599 - 320)));
+  }
+
+  @include mq(xl) {
+    font-size: 35px;
+  }
+}
+
+%title-h4 {
+  line-height: 1.25;
+
+  @include mq(xxs, xl) {
+    font-size: calc(20px + (30 - 20) * ((100vw - 320px) / (1599 - 320)));
+  }
+
+  @include mq(xl) {
+    font-size: 30px;
+  }
+}
+
+%txt {
+  line-height: 1.4;
+
+  @include mq(xxs, xl) {
+    font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1599 - 320)));
+  }
+
+  @include mq(xl) {
+    font-size: 20px;
+  }
+}
+
+%cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

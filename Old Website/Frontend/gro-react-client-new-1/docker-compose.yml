@@ -1,0 +1,10 @@
+workoutlogger:
+  build: .
+  environment:
+      NODE_ENV: development
+  volumes:
+    - .:/usr/src/app/gro-client
+    - /usr/src/app/gro-client/node_modules
+  ports:
+    - '3000:3000'
+    - '3001:3001'

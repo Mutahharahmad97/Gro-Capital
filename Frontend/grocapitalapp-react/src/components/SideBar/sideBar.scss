@@ -1,0 +1,11 @@
+@import "../../assets/sass/helpers/variables";
+@import "../../assets/sass/helpers/mixins";
+
+.sidebar_custom {
+    width: 38% !important;
+    // padding: 0px !important;
+
+    @include mq(xxs, sm) {
+        width: 100% !important;
+    }
+}

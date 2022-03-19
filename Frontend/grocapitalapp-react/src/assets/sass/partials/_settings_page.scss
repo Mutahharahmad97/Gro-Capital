@@ -1,0 +1,99 @@
+.setting-heading {
+    font-size: 22px;
+    padding-top: 239.33px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+html{
+    background-color: $color-gray-100;
+}
+
+// body{
+//     background-color: $color-gray-100;
+// }
+
+.settings-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 52px 115px 85px 115px;
+}
+
+.setting-element{
+    background-color: white;
+    text-align: center;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    min-height: 161px;
+    margin: 0 10px 20px;
+    flex: 1 1;
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition: border-color .2s ease-out, background-color .2s ease-out;
+    position: relative;
+    min-width: 143px;
+    justify-content: center;
+
+    h3{
+        font-size: 12px;
+        color: #016D53;
+        line-height: 1;
+        font-weight: 600;
+        margin: 30px 17px 15px 18px;
+    }
+
+    p {
+        font-size: 12px;
+        color: #016D53;
+        line-height: 1;
+        font-weight: 600;
+        margin: 30px 17px 15px 18px;
+    }
+}
+
+#settings-pages {
+    background-color: $color-gray-100;
+    min-height: 100vh;
+  }
+
+.account_info_heading {
+    h1{
+        font-size: 22px;
+        padding-top: 30px;
+        padding-left: 315px;
+        text-align: left;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+}
+
+.account_info_form{
+    display: flex;
+    justify-content: center;
+    max-width: 752px;
+    max-height: 506px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 15px 400px 110px 307px;
+    
+    &__fields{
+        display: flex;
+        align-content: center;
+        background-color: white;
+        padding: 35px 27px 30px 27px;
+    }
+
+    &__btn{
+    display: flex;
+    justify-content: center;
+    width: 368px;
+    height: 45px;
+    }
+
+    input {
+        background-color: white;
+        border: 1.5px solid #80B6A9
+    }
+}

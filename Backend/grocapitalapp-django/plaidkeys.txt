@@ -1,0 +1,3 @@
+client = plaid.Client(client_id='60ede0aaa3e3f30010f5ecd4',
+                      secret='7f103915266440db074c7d5515f38e',
+                      environment='sandbox')

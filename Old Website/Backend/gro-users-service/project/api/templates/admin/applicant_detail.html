@@ -1,0 +1,714 @@
+{% extends 'admin/master.html' %} {% import 'admin/lib.html' as lib with context %} 
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script type="text/javascript" src="{{url_for('banking.static', filename='lib.js')}}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% endblock %}
+{% block body %} 
+{% block navlinks %}
+<ul class="nav nav-tabs">
+    <li>
+        <a href="{{ return_url }}">{{ _gettext('All Applicants') }}</a>
+    </li>
+    <li class="active">
+        <a href="javascript:void(0)">{{ _gettext('Details') }}</a>
+    </li>
+    {%- if admin_view.can_edit -%}
+    <li>
+        <a href="{{ get_url('.edit_view', id=request.args.get('id'), url=return_url) }}">{{ _gettext('Edit') }}</a>
+    </li>
+    {%- endif -%}
+</ul>
+{% endblock %}
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="col-md-4 ">Applicant Details</h2>
+    </div>
+    <div class="row" id="applicant_details">
+        <div class="col-md-4 col-centered">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-md-10">
+                            <h4>Gro Score</h4>
+                        </div>
+                       <div class="col col-md-2">
+                            <form>
+                                <button class="btn btn-default" >
+                                    <a href="" id="gro_score_button">
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                                        </span>
+                                    </a>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-2" style="
+                      display: inline-block;
+                      position: relative;
+                      width: 210px;
+                      height: 210px;
+                      background: green;
+                      border-radius: 50%;
+                      text-align: center;
+                      padding: 20% 0;
+                      color:white;
+                      font-size:40px">
+                        <span id="gro_score">{{score.gro_score}}</span>
+                    </div>
+                    <div class="col-md-5">
+                        <br>
+                        <div>Data Score:</div>
+                        <div>
+                            <button 
+                                  type="button"
+                                  class="btn btn-primary" 
+                                  name="refreshDataScore"
+                                  type="submit"
+                                >
+                                <span id="data_score">{{score.data_score}}</span>
+                                
+                                </button>
+                        </div>
+                        <br><br>
+                        <div>ML Score:</div>
+                        <div>
+                            <button type="button" class="btn btn-primary" name="refreshMLScore">
+                                <span>
+                                    {{score.ml_score}}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Company Info</h4></div>
+                <div class="panel-body">
+                    <div><b>Name:</b> {{company.company_name}}
+                    </div>
+                    <br>
+                    <div><b>EIN:</b> {{company.ein}}
+                    </div>
+                    <br>
+                    <div><b>DUNS</b>: {{company.duns}}</div>
+                    <br>
+                    <div><b>Address</b>:
+                        <br>{{company.address}}, {{company.city}}, {{company.state}}, {{company.zipcode}}</div>
+                    <br>
+                    <div><b>Loan Amount Applied</b>:
+                        <br>{{company.loan_amount_applied}}</div>
+                    <br>
+                    <div><b>Loan Type:</b>
+                        <br>{{company.loan_type}}</div>
+                    <br>
+                    <div><b>Loan Reason</b>:
+                        <br>{{company.loan_reason}}</div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4> Personal Info</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <img src="{{applicant.profile}}" width="50%">
+                    </div>
+                    <p>
+                        <div>
+                            <b>Name: </b> {{applicant.first_name}} {{applicant.last_name}}
+                            <br>
+                        </div>
+                        <div>
+                            <b>Email: </b>{{applicant.email}}
+                            <br>
+                        </div>
+                        <div>
+                            <b>Birthday:</b> {{applicant.birthday}}
+                        </div>
+                        <div>
+                            <b>Driver License:</b> {{applicant.driverLicense}}
+                            <br>
+                        </div>
+                        <div>
+                            <b>Social Security Number:</b>{{applicant.ssn}}
+                            <br>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="banking_transcations">
+        <div class="col-md-4 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                         <h4>Banking Information</h4>    
+                </div>
+                <div class="panel-body">
+                    <div>
+                        {% for bank_account in bank_accounts %}
+                            <b>Bank Account</b>: {{bank_account.name}}
+                            <br>
+                            <b>Account Type</b>: {{bank_account.account_type}}
+                            <br>
+                            <b>Account Number</b>: {{bank_account.account_number}}
+                            <br>
+                            <b>Routing Number</b>: {{bank_account.routing_number}}
+                            <br>
+                            <b>Last Updated Balance</b>: {{bank_account.balance}}
+                            <br>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                     <h4>Banking Transactions</h4>    
+                </div>
+                <div class="panel-body">
+                    <canvas id="transactionChart"></canvas>     
+                </div>
+            </div>
+         </div>
+    </div>
+    <div class="row" id="financial_report">
+        <div class="col-md-4 col-xs-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-md-10">
+                            <h4>Income Statement</h4>    
+                        </div>
+                        <div class="col col-md-2">
+                            <!-- <form>
+                                <button class="btn btn-default" >
+                                    <a href="" id="income_statement_button">
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                                        </span>
+                                    </a>
+                                </button>
+                            </form> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        {% for report in profit_loss_reports %}
+                        <table class="table">
+                            <th>
+                                Report #{{report.id}}
+                            </th>
+                            <tr>
+                                <td>Start Period</td>
+                                <td>{{report.startPeriod}}</td>
+                            </tr>
+                            <tr>
+                                <td>End Period</td>
+                                <td>{{report.endPeriod}}</td>
+                            </tr>
+                            <tr>
+                                <td>Income</td>
+                                <td>{{report.income}}</td>
+                            </tr>
+                            <tr>
+                                <td>Cost of Goods Sold</td>
+                                <td>{{report.COGS}}</td>
+                            </tr>
+                            <tr>
+                                <td>Gross Profit</td>
+                                <td>{{report.grossProfit}}</td>
+                            </tr>
+                            <tr>
+                                <td>Expenses</td>
+                                <td>{{report.expenses}}</td>
+                            </tr>
+                            <tr>
+                                <td>Net Operating Income</td>
+                                <td>{{report.netOperatingIncome}}</td>
+                            </tr>
+                            <tr>
+                                <td>otherExpenses</td>
+                                <td>{{report.otherExpenses}}</td>
+                            </tr>
+                            <tr>
+                                <td>Net Other Income</td>
+                                <td>{{report.netOtherIncome}}</td>
+                            </tr>
+                            <tr>
+                                <td>Net Income</td>
+                                <td>{{report.netIncome}}</td>
+                            </tr>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-md-10">
+                            <h4>Balance Sheet</h4>    
+                        </div>
+                        <div class="col col-md-2">
+                           <!--  <form>
+                                <button class="btn btn-default" >
+                                    <a href="#" id="data_score_button">
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                                        </span>
+                                    </a>
+                                </button>
+                            </form> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        {% for report in balance_sheet_reports %}
+                        <table class="table">
+                            <th>
+                                Report #{{report.id}}
+                            </th>
+                            <tr>
+                                <td>Start Period</td>
+                                <td>{{report.startPeriod}}</td>
+                            </tr>
+                            <tr>
+                                <td>End Period</td>
+                                <td>{{report.endPeriod}}</td>
+                            </tr>
+                            <tr>
+                                <td>Current Asset</td>
+                                <td>{{report.current_asset}}</td>
+                            </tr>
+                            <tr>
+                                <td>Fixed Asset</td>
+                                <td>{{report.fixed_asset}}</td>
+                            </tr>
+                            <tr>
+                                <td>Current Liability</td>
+                                <td>{{report.current_liability}}</td>
+                            </tr>
+                            <tr>
+                                <td>Longterm Liablity</td>
+                                <td>{{report.longterm_liability}}</td>
+                            </tr>
+                            <tr>
+                                <td>Equity</td>
+                                <td>{{report.equity}}</td>
+                            </tr>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-md-10">
+                            <h4>Cash Flow</h4>    
+                        </div>
+                        <div class="col col-md-2">
+                            <!-- <form>
+                                <button class="btn btn-default" >
+                                    <a href="#" id="data_score_button">
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                                        </span>
+                                    </a>
+                                </button>
+                            </form> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        {% for report in cash_flow_reports %}
+                        <table class="table">
+                            <th>Report: # {{report.id}}</th>
+                            <tr>
+                                <td>Start Period</td>
+                                <td>{{report.startPeriod}}</td>
+                            </tr>
+                            <tr>
+                                <td>End Period</td>
+                                <td>{{report.endPeriod}}</td>
+                            </tr>
+                            <tr>
+                                <td>Beginning Cash</td>
+                                <td>{{report.beginningCash}}</td>
+                            </tr>
+                            <tr>
+                                <td>Operating Net Cash</td>
+                                <td>{{report.operatingNetCash}}</td>
+                            </tr>
+                            <tr>
+                                <td>Investing Net Cash</td>
+                                <td>{{report.investingNetCash}}</td>
+                            </tr>
+                            <tr>
+                                <td>Financing Net Cash</td>
+                                <td>{{report.financingNetCash}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ending Cash</td>
+                                <td>{{report.endingCash}}</td>
+                            </tr>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="machineLearning">
+      <div class="col-md-12 col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">
+                <div class="row">
+                        <div class="col col-md-9">
+                            <h4>Machine Learning Inputs - ${ company_id}</h4>    
+                        </div>
+                        <div class="col col-md-2">
+                            <h4>Simulated Score: ${ groScore }</h4>
+                        </div>
+                        <div class="col col-md-1">
+                        <button class="btn btn-default" v-on:click="recalculateScore">
+                            <a href="#machineLearning" id="data_score_button">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                                </span>
+                            </a>
+                        </button>
+                        
+                        </div>
+                    </div>
+            </div>
+            <!-- Write a Function to Iterate over Vue Data -->
+
+            <!-- Machine Learning Input Table -->
+            <div class="panel panel-body" >
+                <!-- Annual Income  -->
+                <div class="col-md-4" title="annual_inc">
+                    <h5>Annual Income</h5>
+                    <input type="text" class="form-control" placeholder="" id="annual_inc" v-model="annual_inc"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Collection last 12 months -->
+                <div class="col-md-4" title="collections_12mths_zero">
+                    <h5>Collection Last 12 months (Y/N)</h5>
+                    <input type="text" id="collections_12mths_zero" class="form-control" v-model="collections_12mths_zero"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+
+                <!-- Deling 2 Years -->
+                <div class="col-md-4" title="deling_2yrs">
+                    <h5>Number of delinquincies last 2 Years</h5>
+                    <input type="number" class="form-control" placeholder="" id="deling_2yrs" v-model="delinq_2yrs"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Deling 2 Years Yes or No-->
+                <div class="col-md-4" title="delinq_2yrs_zero">
+                    <h5>No delinquincies in last 2 years</h5>
+                    <input  type="number" class="form-control" placeholder="" id="delinq_2yrs_zero" v-model="delinq_2yrs_zero"  v-on:keyup.enter="recalculateScore">               
+                </div>
+
+                <!-- Debt to Income Ratio -->
+                <div class="col-md-4" title="dti">
+                    <h5 v-model="dti">Debt to Income ratio</h5>
+                    <input  type="number" class="form-control" placeholder="" id="dti" v-model="dti"  v-on:keyup.enter="recalculateScore"  v-on:keyup.enter="recalculateScore">               
+                </div>
+
+                <!-- Employment Length Number -->
+                <div class="col-md-4" title="emp_length_num">
+                    <h5>Number of years of employment</h5>
+                    <input type="number" class="form-control" placeholder="" id="dti" v-model="emp_length_num" v-on:keyup.enter="recalculateScore"  v-on:keyup.enter="recalculateScore">              
+                </div>
+
+                <!-- Home Ownership -->
+                <div class="col-md-4" title="home_ownership">
+                    <h5>Home Owner, Mortgage or Rent</h5>
+                    <input list="housing" class="form-control" id="home_ownership" v-model="home_ownership"  v-on:keyup.enter="recalculateScore">
+                    <datalist id="housing">
+                        <option value="RENT"></option>
+                        <option value="MORTGAGE"></option>
+                        <option value="OWN"></option>
+                    </datalist>
+                </div>
+
+                <!-- Inquiries last 6 months -->
+                <div class="col-md-4" title="inq_last_6mths">
+                    <h5>Number of inquiries last 6 months</h5>
+                    <input type="number" class="form-control" placeholder="" id="inq_last_6mths" v-model="inq_last_6mths"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- No Last Delinquence -->
+                <div class="col-md-4" title="last_deling_none">
+                    <h5>No Delinquence on Record</h5>
+                    <input type="number" class="form-control" id="last_delinq_none" v-model="last_delinq_none"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- No Major Derogation -->
+                <div class="col-md-4" title="last_major_derog_none">
+                    <h5>No Major Deorogation</h5>
+                    <input type="number" class="form-control" id="last_major_derog_none" v-model="last_major_derog_none"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Months Since last Delinquency Event -->
+                <div class="col-md-4" title="mths_since_last_delinq">
+                    <h5>Months since last delinquincy event</h5>
+                    <input type="number" class="form-control" id="mths_since_last_delinq" v-model="mths_since_last_delinq"   v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Month Since Last Public Record -->
+                <div class="col-md-4" title="mths_since_last_record">
+                    <h5>Months since lsat public record</h5>
+                    <input type="number" class="form-control" id="mths_since_last_record" v-model="mths_since_last_record"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Month Since Last Major Credit Derogation -->
+                <div class="col-md-4" title="mths_since_last_major_derog">
+                    <h5>Month Since Last Major Credit Derogation</h5>
+                    <input type="number" class="form-control" id=" mths_since_last_major_derog" v-model="mths_since_last_major_derog"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Number of OPEN credit accounts -->
+                <div class="col-md-4" title="open_acc">
+                    <h5>Number of OPEN  credit accounts</h5>
+                    <input type="number" class="form-control" id="open_acc" v-model="open_acc"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Monthly Payment to Monthly Income Ratio -->
+                <div class="col-md-4" title="payment_inc_ratio">
+                    <h5>Monthly Payment to Monthly Income</h5>
+                    <input type="number" class="form-control" id="payment_inc_ratio" v-model="payment_inc_ratio"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Number of Public Records -->
+                <div class="col-md-4" title="pub_rec">
+                    <h5>Number of Public Records</h5>
+                    <input type="number" class="form-control" id="pub_rec" v-model="pub_rec"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Yes or No Recent Public Records -->
+                <div class="col-md-4" title="pub_rec_zero">
+                    <h5>No Recent Public Recordsp</h5>
+                    <input type="number" class="form-control" id="pub_rec_zero" v-model="pub_rec_zero"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Borrowing Purpose -->
+                <div class="col-md-4" title="purpose">
+                    <h5>Borrowing Purpose</h5>
+                    <input type="text" class="form-control" id="purpose" v-model="purpose"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Monthly Revolving Credit Balance -->
+                <div class="col-md-4" title="revolBal">
+                    <h5>Monthly Revolving Credit Balance</h5>
+                    <input type="number" class="form-control" id="revolBal" v-model="revolBal"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Monthly Credit Usage to Credit Limit Ratio -->
+                <div class="col-md-4" title="revolUtil">
+                    <h5>Revolving Credit Ultilization</h5>
+                    <input type="number" class="form-control" id="revolUtil" v-model="revolUtil"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+                <!-- Total Number of Credit Accounts -->
+                <div class="col-md-4" title="total_acc">
+                    <h5>Total number of credit accounts</h5>
+                    <input type="number" class="form-control" id="total_acc" v-model="total_acc"  v-on:keyup.enter="recalculateScore">
+                </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script type="text/javascript">
+   new Vue ({
+        delimiters:['${', '}'],
+        el: '#machineLearning',
+        data: {
+            company_id: "{{ applicant.company }}",
+            collections_12mths_zero: 1,
+            delinq_2yrs: 4.0,
+            delinq_2yrs_zero: 1.0,
+            dti:0.8,
+            emp_length_num: 0,
+            grade: "F",
+            home_ownership: "RENT",
+            inq_last_6mths: 3.0,
+            last_delinq_none: 1,
+            last_major_derog_none: 1,
+            mths_since_last_delinq: 36,
+            mths_since_last_record: 60,
+            mths_since_last_major_derog: 120,
+            open_acc: 1.0,
+            payment_inc_ratio: 3.0,
+            pub_rec: 0.0,
+            pub_rec_zero: 11.0,
+            purpose: "scaling business",
+            revolBal: 4000,
+            revolUtil: 0.95,
+            total_acc: 12,
+            groScore: 300,
+            annual_inc: 60000
+        },
+        mounted: function() {
+            this.recalculateScore()
+        },
+        methods: {
+            recalculateScore(){
+                console.log("Calculating Gro Score");
+                axios.post('https://apis.gro.capital/gro_score/predict/ranForest/'+this.company_id, {
+                        "annual_inc":this.annual_inc,
+                        "collections_12_mths_zero": this.collections_12mths_zero,
+                        "delinq_2yrs": this.delinq_2yrs,
+                        "delinq_2yrs_zero": this.delinq_2yrs_zero,
+                        "dti":this.dti,
+                        "emp_length_num": this.emp_length_num,
+                        "home_ownership": this.home_ownership,
+                        "inq_last_6mths": this.inq_last_6mths,
+                        "last_delinq_none": this.last_delinq_none,
+                        "last_major_derog_none": this.last_major_derog_none,
+                        "open_acc": this.open_acc,
+                        "payment_inc_ratio": this.payment_inc_ratio,
+                        "pub_rec": this.pub_rec,
+                        "pub_rec_zero": this.pub_rec_zero,
+                        "purpose": this.purpose,     
+                        "revol_bal": this.revolBal,
+                        "revol_util": this.revolUtil,
+                        "total_acc": this.total_acc,
+                        "mths_since_last_delinq":this.mths_since_last_delinq,
+                        "mths_since_last_record":this.mths_since_last_record,
+                        "mths_since_last_major_derog":this.mths_since_last_major_derog
+                    })
+                  .then(response => (this.groScore = response.data.total_score))
+                  .catch(function (error) {
+                    console.log(error);
+                    this.groScore = 300;
+                });
+            }
+        }
+    })
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('a#gro_score_button').bind('click', function(){
+            console.log("gro_score_button clicked");
+            $.getJSON('/admin/loan_applicants/details/gro_score_update/?id={{applicant.id}}',
+                function(data) {
+                    $('#data_score').text(data['data_score']);
+                    $('#ml_score').text(data['ml_score']);
+                    $('#gro_score').text(data['gro_score']);
+                    console.log(data);
+                }
+            )
+            return false;
+        });
+    });
+</script>
+<script type="text/javascript">
+        var dateFormat = 'MMMM DD YYYY';
+        var data = [];
+        var labels = [];
+        axios.get('https://apis.gro.capital/banking/daily_balance/{{applicant.uid}}')
+          .then(function (response) {
+            var transactions = response.data.daily_transactions;
+            // console.log(transactions[0]['amount']);
+            for (i = 0, len = transactions.length; i < len; i++) { 
+                 amount = transactions[i]['amount'];
+                 data.push(amount);
+                 date = transactions[i]['date'];
+                 labels.push(date);
+                 // console.log(amount);
+                 // console.log(date);
+            }
+            var ctx = document.getElementById('transactionChart').getContext('2d');
+            ctx.canvas.width = 1000;
+            ctx.canvas.height = 600;
+            var cfg = {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Daily Banking Transactions',
+                        data: data,
+                        type: 'bar',
+                        pointRadius: 0,
+                        fill: false,
+                        lineTension: 0,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            distribution: 'series',
+                            ticks: {
+                                source: 'labels'
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Transaction Amount'
+                            }
+                        }]
+                    },
+                    pan: {
+                        enable: true,
+                        mode: 'xy'
+                    },
+                    zoom: {
+                        enabled: true,
+                        // Enable drag-to-zoom behavior
+                        drag: true,
+
+                        // Zooming directions. Remove the appropriate direction to disable 
+                        // Eg. 'y' would only allow zooming in the y direction
+                        mode: 'xy',
+                        rangeMin: {
+                            // Format of min zoom range depends on scale type
+                            x: null,
+                            y: null
+                        },
+                        rangeMax: {
+                            // Format of max zoom range depends on scale type
+                            x: null,
+                            y: null
+                        }
+                    }
+                }
+            };
+            var chart = new Chart(ctx, cfg);
+          })
+          .catch(function (error) {
+            console.log(error);
+        });
+</script>
+<script type="text/javascript">
+    lib.troydo42.updateBanking({'uid':'123321123'}, function(err, result){
+        console.log(result);
+    })
+</script>
+
+{{ super() }} {% endblock %}

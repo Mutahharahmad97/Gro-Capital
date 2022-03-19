@@ -1,0 +1,176 @@
+@mixin mq($bpmin, $bpmax: false) {
+  @each $sz, $mq in $sizes {
+    @if $sz == $bpmin {
+      $a: $mq;
+      @if $bpmax {
+        @each $sz, $mq in $sizes {
+          @if $sz == $bpmax {
+            @media (min-width: #{$a}px) and (max-width: $mq - 1px) {
+              @content;
+            }
+          }
+        }
+      } @else {
+        @media (min-width: #{$a}px) {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+$sizes: (
+  xxs: 0,
+  xs: 480,
+  sm: 768,
+  md: 992,
+  lg: 1280,
+  xl: 1600,
+);
+
+// Centered element
+
+@mixin el-center {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: transform(-50%, -50%);
+}
+
+// custom mixins
+
+//===========================================
+// -Mixins start
+//===========================================
+
+// conver px to rem
+@function rem($pixels, $context: 16) {
+  @return ($pixels / $context) * 1rem;
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+@mixin font-face($family, $path, $name, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: "#{$family}";
+    src: url("#{$path}/#{$name}.ttf") format("truetype"),
+      url("#{$path}/#{$name}.woff") format("woff"),
+      url("#{$path}/#{$name}.svg##{$name}") format("svg");
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+// Responsive Units
+// @properties : css properties i.e font-size
+// @min-vw : start point from where font size start increasing
+// @max-vw : end point from where font size stop increasing
+// @min-value : min value of css property i.e min font-size
+// @max-value : max value of css property i.e max font-size
+@mixin res-unit($properties, $min-vw, $max-vw, $min-value, $max-value) {
+  @each $property in $properties {
+    #{$property}: $min-value;
+  }
+
+  @media (min-width: map-get($grid-breakpoints, $min-vw)) {
+    @each $property in $properties {
+      #{$property}: calc(
+        #{$min-value} +
+          #{strip-unit($max-value - $min-value)} *
+          (100vw - #{map-get($grid-breakpoints, $min-vw)}) /
+          #{strip-unit(
+            map-get($grid-breakpoints, $max-vw) -
+              map-get($grid-breakpoints, $min-vw)
+          )}
+      );
+    }
+  }
+
+  @media (min-width: map-get($grid-breakpoints, $max-vw)) {
+    @each $property in $properties {
+      #{$property}: $max-value;
+    }
+  }
+}
+
+@mixin center($horizontal: true, $vertical: true) {
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+@mixin flex-v-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin circle($size) {
+  @include square($size);
+  border-radius: 50%;
+}
+
+@mixin is-parent($parent-selector) {
+  $current-sequences: &;
+  $new-sequences: ();
+
+  @each $sequence in $current-sequences {
+    $current-selector: nth($sequence, -1);
+    $prepended-selector: join($parent-selector, $current-selector);
+    $new-sequence: set-nth($sequence, -1, $prepended-selector);
+    $new-sequences: append($new-sequences, $new-sequence, comma);
+  }
+
+  @at-root #{$new-sequences} {
+    @content;
+  }
+}
+
+@mixin reset-button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  line-height: 1;
+  &:focus {
+    outline: 0;
+  }
+}
+
+@mixin invisible-scrollbar {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+//===========================================
+// -Mixins end
+//===========================================

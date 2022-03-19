@@ -1,0 +1,126 @@
+.Select-menu-outer {
+  max-height: 250px !important;
+}
+.Select-menu-outer > div {
+  max-height: 200px !important;
+}
+.input-link {
+  font-size: 12px;
+  color: cornflowerblue;
+  display: block;
+  text-align: right;
+  padding-top: 5px;
+  margin-right: 30px;
+}
+.box-wrapper {
+  display: block;
+  /* padding-left: 10px;
+  padding-right: 25px; */
+}
+.half {
+  width: 50%;
+  float: left;
+  /* margin-left: 5%; */
+}
+.success-message {
+  display: block;
+  text-align: center;
+  padding-top: 100px;
+  background: url('../images/checked.svg');
+  background-size: 64px 64px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  font-weight: 500;
+  font-size: 18px;
+  color: #8bc34a;
+  margin-top: 30px;
+  animation-name: zoomIn;
+  animation-duration: 1s;
+  letter-spacing: 1px;
+}
+.bottom {
+  position: absolute;
+  bottom: 0px;
+  display: block;
+}
+.small-print {
+  font-size: 11px;
+  color: #666;
+}
+.small-print a {
+  color: blue;
+  text-decoration: underline;
+}
+@keyframes zoomIn {
+  0% {
+    background-size: 64px 64px;
+  }
+  25% {
+    background-size: 74px 64px;
+  }
+  50% {
+    background-size: 84px 84px;
+  }
+  100% {
+    background-size: 74px 64px;
+  }
+}
+
+.check-rating{
+  text-align: left;
+  padding-top: 5px;
+  margin-bottom: 17px;
+}
+.check-score{
+  text-align: left;
+  padding-top: 5px;
+}
+
+.check-score button{
+  right: 0;
+  height: 23px;
+  border-radius: 4px;
+  background-color: #98C25F !important;
+  color: #FFFFFF;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  top: -3px;
+  border: none !important;
+  outline: none;
+  cursor: pointer;
+}
+
+.check-rating  button {
+  right: 0;
+  height: 23px;
+  border-radius: 4px;
+  background-color: #98C25F !important;
+  color: #FFFFFF;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  top: -3px;
+  border: none !important;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.th-style{
+  width: 27px;
+  color: #424242 !important;
+  font-family: Roboto;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  /*background-color: #8acc3f;*/
+  padding: 10px;
+}
+.hide-column{
+  display: none;
+}
+
+/*.iaGIN{*/
+/*  background-color: yellowgreen;*/
+/*}*/
